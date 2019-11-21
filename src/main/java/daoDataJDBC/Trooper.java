@@ -7,6 +7,7 @@ import java.sql.SQLException;
 public class Trooper {
 	public static Connection newConnection() throws SQLException {
 		// return a connection here
+//		change for Jenkins
 		return DriverManager.getConnection("jdbc:mysql://localhost:3306/storm_trooper", "root", "root"); 
 	}
 	
