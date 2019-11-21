@@ -49,8 +49,7 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-		</plugins>
-		<!-- Tomcat Maven Plugin  -->
+			<!-- Tomcat Maven Plugin  -->
 				<plugin>
 					<groupId>org.apache.tomcat.maven</groupId>
 					<artifactId>tomcat7-maven-plugin</artifactId>
@@ -68,6 +67,7 @@
 						<path>/example</path>
 					</configuration>
 				</plugin>
+		</plugins>
 		
 	</build>
 </project>
