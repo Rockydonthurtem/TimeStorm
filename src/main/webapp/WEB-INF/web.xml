@@ -3,13 +3,38 @@
 	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
+	<!-- Display name is the initial path to the project. URL will look like http://localhost:8080/TimeStorm/..filename for any file in WEB-INF 
+		Steps seem to be in this order
+		1. /TimeStorm
+		2. Pass/defer to servlet. 
+		3. Servlet name is defined and will be used for mapping, no other reasons appear obvious at the moment
+		4. Servlet class if FQN telling what servlet and what method (Package.Class) will handle the request
+			**in url pattern, we are saying FrontController will handle /api/* (all api request (get,put,post,delete- api seems like an interface, lolz, making sense)
+			you dont have to have a FrontController but is good practice. Because of the * in api/* we can use a switch statement 
+			switch (uri) {
+		case "/TimeStorm/api/id":
+			if (req.getMethod().equals("POST")) {
+				userController.postUser(req, resp);
+				return;
+			}
+			if (req.getMethod().equals("PUT")) {
+				userController.putUser(req, resp);
+				return;
+			}
+	
+		5. FrontController is a design pattern?? A centralize location for handling request (doGet, doPost, doDelete, doPut)
+	 -->
 	<display-name>TimeStorm</display-name>
 	<servlet>
-		<servlet-name>Now</servlet-name>
-		<servlet-class>myController.DispatcherServlet</servlet-class>
+		<servlet-name>FrontController</servlet-name>
+		<!-- servlet class mycontroller.Controller should match an actual controller, Most likely FrontController -->
+		<!-- servlet-class is consist of the package name. controller in the package  -->
+		<servlet-class>myController.FrontController</servlet-class>
+		<!-- load on startup will prevent loading if .... -->
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Now</servlet-name>
+		<servlet-name>FrontController</servlet-name>
 		<url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
 </web-app>
