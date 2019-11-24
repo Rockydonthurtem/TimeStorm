@@ -40,9 +40,9 @@ public class Trooper {
 			ResultSet results = stmt.executeQuery();
 			System.out.println("Null or column name, interesting?? " + results);
 			results.next();
-			user = new User(results.getInt(1), results.getString(null), results.getString("lname"), "", "");
-			
-			System.out.println( "OK HERES USER" +  user);
+//			user = new User(results.getInt(1), results.getString(null), results.getString("lname"), "", "");
+			user = new User(results.getInt(1),results.getString("fname"),"","","");
+			System.out.println( "OK HERES USER " +  user);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -54,33 +54,5 @@ public class Trooper {
 		}
 		return user;
 	}
-	
-//	public User getUser(int i) {
-//		Connection conn = getConnection();
-//		User user = null;
-//		try {
-//			String sql = "select * from users where user_ID=?";
-//			
-//			PreparedStatement stmt = conn.prepareStatement(sql);
-//			new String[] {
-//			ResultSet rs = stmt.executeQuery();
-//			
-//			
-//			while(rs.next()) {
-//				User user_sql = rs.getInt(i),
-//						
-//				results.add(ts);
-//			} //end while
-//		} catch (SQLException e) {
-//			throw new RuntimeException(e);
-//		} finally {
-//			try {
-//				conn.close();
-//			} catch (SQLException e) {
-//				throw new RuntimeException(e);
-//			}
-//		}
-//		return results;
-//	}
-//}
+
 }

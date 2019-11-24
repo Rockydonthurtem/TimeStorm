@@ -17,7 +17,7 @@ public class UserController {
 
 	public void getUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("application/json");
-		System.out.println("PARAMS" + req);
+		System.out.println("PARAMS" + req.getParameter("id"));
 		if (req.getParameter("id") != null) {
 			try {
 				resp.getWriter().println(new ObjectMapper()
