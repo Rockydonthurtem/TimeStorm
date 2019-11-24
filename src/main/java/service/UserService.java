@@ -17,4 +17,9 @@ private Trooper user = new Trooper();
 		return user.getUser(id);
 	}
 	
+	public User log_user_in(String username, String password) throws SQLException {
+		return user.getUserLoginInfo(username, password);
+
+	}
+	
 }

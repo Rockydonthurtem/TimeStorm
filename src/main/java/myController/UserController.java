@@ -11,21 +11,24 @@ import service.UserService;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import beans.User;
+
 public class UserController {
 
 	private UserService userService = new UserService();
 
-	public void getUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	public void getUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
+		
 		resp.setContentType("application/json");
 		System.out.println("PARAMS" + req.getParameter("id"));
-		if (req.getParameter("id") != null) {
+		if (req.getParameter("username") !=null && req.getParameter("password") != null) {
 			try {
-				resp.getWriter().println(new ObjectMapper()
-						.writeValueAsString(userService.getUser(Integer.parseInt(req.getParameter("id")))));
+//				resp.getWriter().println(new ObjectMapper()
+//						.writeValueAsString(userService.getUser(Integer.parseInt(req.get("id")))));
+				
+						User user_login = userService.log_user_in(req.getParameter("username"), req.getParameter("password"));
+						resp.getWriter().println(new ObjectMapper().writeValueAsString(user_login));
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

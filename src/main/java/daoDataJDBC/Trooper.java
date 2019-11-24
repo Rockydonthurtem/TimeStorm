@@ -27,6 +27,18 @@ public class Trooper {
 		}
 	}
 	
+	public User getUserLoginInfo(String username, String password) throws SQLException {
+		System.out.println("Starting to check user in " + username + password);
+		Connection conn = getConnection();
+		User user = null; //why do we do this??
+		PreparedStatement stmt = conn.prepareStatement("select * from users where username=? AND password=?");
+		stmt.setString(1,username);
+		stmt.setString(2, username);
+		ResultSet results = stmt.executeQuery();
+		results.next();
+		
+		return user;
+	}
 	public User getUser(int id) {
 		System.out.println("TROOPER DAO LOOKING FOR A # " + id);
 		Connection conn = getConnection();
