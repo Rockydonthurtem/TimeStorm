@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 public class FrontController extends HttpServlet {
 	
 	private UserController userController = new UserController();
+	private TimeController timeController = new TimeController();
 	
 	//first do doGet and then pass it to doDispatch
 	//Could you/ why not do dispatch in each "do" method.. You would have to have a parent class or the method to handle it for each request, 
@@ -59,13 +60,15 @@ public class FrontController extends HttpServlet {
 				}
 				return;
 			}
-			 if (req.getMethod().equals("GET")) {
-				userController.postUser(req,resp);
-				return;
+		case "/TimeStorm/gettime":
+			if(req.getMethod().equals("GET")) {
+				timeController.getTime(req,resp);
 			}
 		default:
 			break;
 		}
+		
+			
 	}
 //			@Override
 //			protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

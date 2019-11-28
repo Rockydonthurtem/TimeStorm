@@ -17,9 +17,7 @@ document.getElementById("trooper").addEventListener("submit", function(e) {
   let promise = axios.post(
     "http://localhost:8080/TimeStorm/api/id",
     requestInfo
-  ); //this is passing on body, remember, its been a while
+  );
+  //this is passing on body, remember, its been a while
   console.log("PROMISE", promise);
-  promise.then(function(response) {
-    console.log("HEJRERER", response.data);
-  });
 });
