@@ -14,7 +14,8 @@ document.getElementById("trooper").addEventListener("submit", function(e) {
     username: username,
     password: password
   };
-  let promise = axios.post(
+  let promise = axios.get(
+    /*CHANGE THIS BACK TO POST OR HANDLE IN FC W/ DIFF VERB */
     "http://localhost:8080/TimeStorm/api/id",
     requestInfo
   );

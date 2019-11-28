@@ -44,29 +44,39 @@ public class FrontController extends HttpServlet {
 		
 		//this is reading the URI log it to see whats coming in, may have to change somethings due to Axios
 		System.out.println("OK THIS doDispatch:" + uri);
-		switch (uri) {
+		switch(uri) {
 		case "/TimeStorm/api/id":
-			if (req.getMethod().equals("POST")) {
-				try {
-					try {
-						userController.getUser(req, resp);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				} catch (NumberFormatException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				return;
+			if(req.getMethod().equals("POST")) {
+				timeController.getTime(req, resp);
 			}
-		case "/TimeStorm/gettime":
-			if(req.getMethod().equals("GET")) {
-				timeController.getTime(req,resp);
-			}
-		default:
-			break;
+			default:
+				break;
 		}
+//		switch (uri) {
+//		case "/TimeStorm/api/id":
+//			if (req.getMethod().equals("GET")) {
+//			will need to change back to post or handle
+//				try {
+//					try {
+//						userController.getUser(req, resp);
+//					} catch (Exception e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//				} catch (NumberFormatException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				return;
+//			}
+//		
+//		
+//			 if(req.getMethod().equals("POST")) {
+//				timeController.getTime(req,resp);
+//			}
+//		default:
+//			break;
+//		}
 		
 			
 	}
