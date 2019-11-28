@@ -25,13 +25,14 @@ public class UserController {
 		
 		if(userForThisRequest.getPassword().isEmpty() != true && userForThisRequest.getUsername().isEmpty() != true) {
 			resp.getWriter().println(new ObjectMapper().writeValueAsString(
-					userService.log_user_in(userForThisRequest.getUsername().toString(), userForThisRequest.getPassword())));
+					user = userService.log_user_in(userForThisRequest.getUsername().toString(), userForThisRequest.getPassword())));
 			// headers
 			resp.setStatus(201);
 		}
 		
-		System.out.println("USRCONTRL " + userService);
-		System.out.println("DFDFDFD " + req.getSession().getAttribute("username"));
+		System.out.println("USRCONTRL " + user);
+		System.out.println("DFDFDFD " + req.getSession().getAttribute("id") );
+		System.out.println("Second attribute " + req.getSession().getAttribute("fname"));
 		req.getSession().setAttribute("id", user.getUser_id());
 	}
 		
