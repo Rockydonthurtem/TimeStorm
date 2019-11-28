@@ -40,10 +40,12 @@ public class FrontController extends HttpServlet {
 	//Dispatcher does exactly what the name implies, it Dispatches to location you provide in the 
 	protected void doDispatch(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
-		System.out.println("Tell me  URI:::" + uri);
+		
+		//this is reading the URI log it to see whats coming in, may have to change somethings due to Axios
+		System.out.println("OK THIS doDispatch:" + uri);
 		switch (uri) {
 		case "/TimeStorm/api/id":
-			if (req.getMethod().equals("GET")) {
+			if (req.getMethod().equals("POST")) {
 				try {
 					try {
 						userController.getUser(req, resp);
@@ -57,7 +59,7 @@ public class FrontController extends HttpServlet {
 				}
 				return;
 			}
-			 if (req.getMethod().equals("POST")) {
+			 if (req.getMethod().equals("GET")) {
 				userController.postUser(req,resp);
 				return;
 			}

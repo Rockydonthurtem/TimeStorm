@@ -18,25 +18,40 @@ public class UserController {
 	private UserService userService = new UserService();
 
 	public void getUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException, SQLException {
-		
+		User user = null;
 		resp.setContentType("application/json");
-		System.out.println("PARAMS" + req.getParameter("id"));
-		if (req.getParameter("username") !=null && req.getParameter("password") != null) {
-			try {
-//				resp.getWriter().println(new ObjectMapper()
-//						.writeValueAsString(userService.getUser(Integer.parseInt(req.get("id")))));
-				
-						User user_login = userService.log_user_in(req.getParameter("username"), req.getParameter("password"));
-						resp.getWriter().println(new ObjectMapper().writeValueAsString(user_login));
-			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else {
-			System.out.println("try something else");
-			resp.sendError(401);
+
+		User userForThisRequest = new ObjectMapper().readValue(req.getInputStream(), User.class);
+		
+		if(userForThisRequest.getPassword().isEmpty() != true && userForThisRequest.getUsername().isEmpty() != true) {
+			resp.getWriter().println(new ObjectMapper().writeValueAsString(
+					userService.log_user_in(userForThisRequest.getUsername().toString(), userForThisRequest.getPassword())));
+			// headers
+			resp.setStatus(201);
 		}
+		
+		System.out.println("USRCONTRL " + userService);
+		System.out.println("DFDFDFD " + req.getSession().getAttribute("username"));
+		req.getSession().setAttribute("id", user.getUser_id());
 	}
+		
+		
+//		if (new ObjectMapper().writeValueAsString(userForThisRequest) != null) {
+//			System.out.println("INSIDE " + userForThisRequest.getUsername());
+//			try {
+//
+//				
+//						User user_login = userService.log_user_in(req.getParameter("username"), req.getParameter("password"));
+//						resp.getWriter().println(new ObjectMapper().writeValueAsString(user_login));
+//			} catch (NumberFormatException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		} else {
+//			System.out.println("try something else");
+//			resp.sendError(401);
+//		}
+//	}
 	
 	public void postUser(HttpServletRequest req, HttpServletResponse resp) {
 		resp.setContentType("application/json");
