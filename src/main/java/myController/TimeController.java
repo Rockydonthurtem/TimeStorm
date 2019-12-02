@@ -21,16 +21,11 @@ public class TimeController {
 	private UserService userService = new UserService();
 	
 	
-	public void getTime(HttpServletRequest req, HttpServletResponse resp) throws JsonParseException, JsonMappingException, IOException {
+	public void getTime(HttpServletRequest req, HttpServletResponse resp) throws JsonParseException, JsonMappingException, IOException, SQLException {
 		System.out.println("HERE " + req);
-		
-//		Time timeForThisRequest = new ObjectMapper().readValue(req.getInputStream(), Time.class);
-//		System.out.println("UNDER HERE " + timeForThisRequest);
+	
 		resp.setContentType("application/json");
-		
-//		Time userForThisRequest = new ObjectMapper().readValue(req.getInputStream(), Time.class);
-		
-//		System.out.println("Input stream Time " + userForThisRequest.get);
+
 		String monday = req.getParameter("monday");
 		String tuesday = req.getParameter("tuesday");
 		String wednesday = req.getParameter("wednesday");
@@ -39,19 +34,12 @@ public class TimeController {
 		String saturday = req.getParameter("saturday");
 		String sunday = req.getParameter("sunday");
 		
-		System.out.println("ALL " + req);
-		System.out.println("DAYS "  + monday + tuesday + wednesday);
-		
-		
 		HttpSession session = req.getSession();
-		System.out.println("H session " + session.getAttribute("id"));
-		System.out.println("Name session " + session.getAttribute("fname"));
-		System.out.println("Session check " + session.getAttribute("id").toString());
 		Time time = null;
 		String user_id = session.getAttribute("id").toString();
 		System.out.println("What is the day" + monday);
 		resp.getWriter().println(new ObjectMapper().writeValueAsString(
-				userService.newTime(user_id, monday, tuesday, wednesday, thursday, friday, saturday, sunday)));
+				userService.newTime("user_id", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday")));
 		// headers
 		
 		resp.setStatus(201);

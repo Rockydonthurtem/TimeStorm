@@ -23,8 +23,6 @@ private Trooper user = new Trooper();
 		return user.getUserLoginInfo(username, password);
 
 	}
-	
-	
 
 	public String time(int i, int j, String monday, String tuesday, String wednesday, String thursday, String friday,
 			String saturday, String sunday, int k, int l) {
@@ -33,9 +31,9 @@ private Trooper user = new Trooper();
 		return null;
 	}
 
-	public Time newTime(String user_id, String monday, String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday) {
+	public Time newTime(String  user_id, String monday, String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday) throws SQLException {
 		System.out.println("User serice newTime log " + monday);
-		return null;
+		return user.submitTime(user_id, monday, tuesday, wednesday, thursday, friday, saturday, sunday);
 	}
 
 	public Object timeByUser(String user_id) throws SQLException {

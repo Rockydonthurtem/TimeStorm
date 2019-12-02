@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class Trooper {
 	
 		Connection conn = getConnection();
 		 //why do we do this?? this i innitializing user to null, will use this after query to set values and update user 
+		
 		PreparedStatement stmt = conn.prepareStatement("select id, fname from users where username=? AND password=?");
 		stmt.setString(1,username.toString());
 		stmt.setString(2, password);
@@ -43,28 +45,30 @@ public class Trooper {
 		return user;
 	}
 	
-	public User submitTime(String user_id, String monday, String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday) {
+	@SuppressWarnings("null")
+	public Time submitTime(String user_id, String monday, String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday) throws SQLException {
 		System.out.println("Sub time before conn " + user_id);
-		Time yourTime = null;
+		Time user_time = null;
+		String query = "insert into time (users_id, monday, tuesday, wednesday, thursday, friday, saturday, sunday)" + "values(?,?,?,?,?,?,?,?)";
 		Connection conn = getConnection();
-		PreparedStatement stmt = conn.prepareStatement("insert into time (monday, tuesday, wednesday, thursday, friday, saturday, sunday)"
-				+ "values(?,?,?,?,?,?,?) where users_id=?");
-		stmt.setString(1, monday);
-		stmt.setString(2, tuesday);
-		stmt.setString(3, wednesday);
-		stmt.setString(4, thursday);
-		stmt.setString(5, friday);
-		stmt.setString(6, saturday);
-		stmt.setString(7, sunday);
-		stmt.setString(8, user_id);
-		ResultSet results = stmt.executeQuery();
-		System.out.println("Sub time"+ results);
-		results.next();
-		yourTime = new Time(results.getInt("id"), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+		PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+		stmt.setString(1, user_id);
+		stmt.setString(2, monday);
+		stmt.setString(3, tuesday);
+		stmt.setString(4, wednesday);
+		stmt.setString(5, thursday);
+		stmt.setString(6, friday);
+		stmt.setString(7, saturday);
+		stmt.setString(8, sunday);
+		stmt.executeUpdate();
+		ResultSet key = stmt.getGeneratedKeys();
+		System.out.println("Sub time"+ key);
+		key.next();
+		user_time.getUsers_id(key.getInt(1));
 		
 		conn.close();
-		return user;
-		return null;
+		return submitTime("users_id", monday, tuesday, wednesday, thursday, friday, saturday, sunday);
+		
 	}
 	
 	public Time timeByUser(String user_id) throws SQLException {

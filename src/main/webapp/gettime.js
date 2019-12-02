@@ -36,12 +36,12 @@ let requestInfo = {
 // ll
 // kk
 
-let promise = axios
+let other_promise = axios
   .post("http://localhost:8080/TimeStorm/api/time", requestInfo)
   .then(res => {
     console.log("MY response", res);
   });
-console.log("New_timesheet promise", promise);
+console.log("New_timesheet promise", other_promise);
 // fdd
 // dsfs
 // sdff

@@ -44,7 +44,7 @@ public class Time {
 //		Timesheet_id = timesheet_id;
 //	}
 
-	public int getUsers_id() {
+	public int getUsers_id(int i) {
 		return Users_id;
 	}
 
