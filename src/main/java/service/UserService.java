@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import beans.User;
+
 import daoDataJDBC.Trooper;
 
 
@@ -18,9 +19,23 @@ private Trooper user = new Trooper();
 //	}
 	
 	public User log_user_in(String username, String password) throws SQLException {
-		System.out.println("SERVICE " + username);
 		return user.getUserLoginInfo(username, password);
 
 	}
 	
+	
+
+	public String time(int i, int j, String monday, String tuesday, String wednesday, String thursday, String friday,
+			String saturday, String sunday, int k, int l) {
+		
+			
+		return null;
+	}
+
+
+
+	public Object timeByUser(String user_id) throws SQLException {
+		// TODO Auto-generated method stub
+		return user.timeByUser(user_id);
+	}
 }

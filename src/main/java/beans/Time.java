@@ -2,7 +2,7 @@ package beans;
 
 public class Time {
 
-	private int Timesheet_id;
+//	private int Timesheet_id;
 	private int Users_id;
 	private int Monday;
 	private int Tuesday;
@@ -19,11 +19,11 @@ public class Time {
 		super();
 	}
 
-	public Time(int timesheet_id, int users_id, int monday, int tuesday, int wednesday, int thursday, int friday,
+	public Time(int users_id, int monday, int tuesday, int wednesday, int thursday, int friday,
 			int saturday, int sunday, int total, int status) {
 		super();
 		
-		Timesheet_id = timesheet_id;
+//		Timesheet_id = timesheet_id;
 		Users_id = users_id;
 		Monday = monday;
 		Tuesday = tuesday;
@@ -36,13 +36,13 @@ public class Time {
 		Status = status;
 	}
 
-	public int getTimesheet_id() {
-		return Timesheet_id;
-	}
-
-	public void setTimesheet_id(int timesheet_id) {
-		Timesheet_id = timesheet_id;
-	}
+//	public int getTimesheet_id() {
+//		return Timesheet_id;
+//	}
+//
+//	public void setTimesheet_id(int timesheet_id) {
+//		Timesheet_id = timesheet_id;
+//	}
 
 	public int getUsers_id() {
 		return Users_id;

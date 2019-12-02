@@ -44,41 +44,55 @@ public class FrontController extends HttpServlet {
 		
 		//this is reading the URI log it to see whats coming in, may have to change somethings due to Axios
 		System.out.println("OK THIS doDispatch:" + uri);
-		switch(uri) {
+		switch (uri) {
 		case "/TimeStorm/api/id":
-			if(req.getMethod().equals("POST")) {
-				timeController.getTime(req, resp);
+			if (req.getMethod().equals("POST")) {
+				try {
+					try {
+						userController.getUser(req, resp);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return;
 			}
-			default:
-				break;
+		case "/TimeStorm/api/time":
+			 if (req.getMethod().equals("POST")) {
+				 try {
+						try {
+							timeController.getTime(req, resp);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return;
+				}
+		case "/TimeStorm/api/all":
+			 if (req.getMethod().equals("GET")) {
+				 try {
+						try {
+							timeController.allTime(req, resp);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} catch (NumberFormatException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return;
+				}
+		default:
+			break;
 		}
-//		switch (uri) {
-//		case "/TimeStorm/api/id":
-//			if (req.getMethod().equals("GET")) {
-//			will need to change back to post or handle
-//				try {
-//					try {
-//						userController.getUser(req, resp);
-//					} catch (Exception e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//				} catch (NumberFormatException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//				return;
-//			}
-//		
-//		
-//			 if(req.getMethod().equals("POST")) {
-//				timeController.getTime(req,resp);
-//			}
-//		default:
-//			break;
-//		}
-		
-			
 	}
 //			@Override
 //			protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

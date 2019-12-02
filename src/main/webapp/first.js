@@ -14,11 +14,11 @@ document.getElementById("trooper").addEventListener("submit", function(e) {
     username: username,
     password: password
   };
-  let promise = axios.get(
-    /*CHANGE THIS BACK TO POST OR HANDLE IN FC W/ DIFF VERB */
-    "http://localhost:8080/TimeStorm/api/id",
-    requestInfo
-  );
+  let promise = axios
+    .post("http://localhost:8080/TimeStorm/api/id", requestInfo)
+    .then(res => {
+      console.log("FIRST JS log", res);
+    });
   //this is passing on body, remember, its been a while
   console.log("PROMISE", promise);
 });
