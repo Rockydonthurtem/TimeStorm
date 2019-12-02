@@ -27,6 +27,10 @@ public class TimeController {
 //		Time timeForThisRequest = new ObjectMapper().readValue(req.getInputStream(), Time.class);
 //		System.out.println("UNDER HERE " + timeForThisRequest);
 		resp.setContentType("application/json");
+		
+//		Time userForThisRequest = new ObjectMapper().readValue(req.getInputStream(), Time.class);
+		
+//		System.out.println("Input stream Time " + userForThisRequest.get);
 		String monday = req.getParameter("monday");
 		String tuesday = req.getParameter("tuesday");
 		String wednesday = req.getParameter("wednesday");
@@ -42,11 +46,15 @@ public class TimeController {
 		HttpSession session = req.getSession();
 		System.out.println("H session " + session.getAttribute("id"));
 		System.out.println("Name session " + session.getAttribute("fname"));
-
+		System.out.println("Session check " + session.getAttribute("id").toString());
+		Time time = null;
+		String user_id = session.getAttribute("id").toString();
+		System.out.println("What is the day" + monday);
+		resp.getWriter().println(new ObjectMapper().writeValueAsString(
+				userService.newTime(user_id, monday, tuesday, wednesday, thursday, friday, saturday, sunday)));
+		// headers
 		
-//		if(req != null) {
-//			String time = userService.time(1,1, monday, tuesday, wednesday, thursday, friday, saturday, sunday, 1,1);
-//		}
+		resp.setStatus(201);
 	}
 	
 	public void allTime(HttpServletRequest req, HttpServletResponse resp) throws JsonProcessingException, IOException, SQLException {

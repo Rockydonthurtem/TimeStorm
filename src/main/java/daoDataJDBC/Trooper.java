@@ -43,9 +43,27 @@ public class Trooper {
 		return user;
 	}
 	
-	public User submitTime( String monday, String tuesday, String wednesday, String thursday, String friday,
-			String saturday, String sunday, int k, int l) {
+	public User submitTime(String user_id, String monday, String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday) {
+		System.out.println("Sub time before conn " + user_id);
+		Time yourTime = null;
 		Connection conn = getConnection();
+		PreparedStatement stmt = conn.prepareStatement("insert into time (monday, tuesday, wednesday, thursday, friday, saturday, sunday)"
+				+ "values(?,?,?,?,?,?,?) where users_id=?");
+		stmt.setString(1, monday);
+		stmt.setString(2, tuesday);
+		stmt.setString(3, wednesday);
+		stmt.setString(4, thursday);
+		stmt.setString(5, friday);
+		stmt.setString(6, saturday);
+		stmt.setString(7, sunday);
+		stmt.setString(8, user_id);
+		ResultSet results = stmt.executeQuery();
+		System.out.println("Sub time"+ results);
+		results.next();
+		yourTime = new Time(results.getInt("id"), 0, 0, 0, 0, 0, 0, 0, 0, 0);
+		
+		conn.close();
+		return user;
 		return null;
 	}
 	
@@ -75,32 +93,4 @@ public class Trooper {
 		conn.close();
 		return all_time;
 	}
-//	public User getUser(int id) {
-//		System.out.println("TROOPER DAO LOOKING FOR A # " + id);
-//		Connection conn = getConnection();
-//		System.out.println("2nd conn log, in getUser method" + conn);
-//		User user = null;
-//		try {
-//			PreparedStatement stmt = conn.prepareStatement(
-//					 "select * from users where id=?"
-//					);
-//			stmt.setInt(1, id);
-//			ResultSet results = stmt.executeQuery();
-//			System.out.println("Null or column name, interesting?? " + results);
-//			results.next();
-////			user = new User(results.getInt(1), results.getString(null), results.getString("lname"), "", "");
-//			user = new User(results.getInt(1),results.getString("fname"),"","","");
-//			System.out.println( "OK HERES USER " +  user);
-//		} catch (SQLException e) {
-//			throw new RuntimeException(e);
-//		} finally {
-//			try {
-//				conn.close();
-//			} catch (SQLException e) {
-//				throw new RuntimeException(e);
-//			}
-//		}
-//		return user;
-//	}
-
 }

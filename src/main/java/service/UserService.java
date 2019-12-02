@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
 
+import beans.Time;
 import beans.User;
 
 import daoDataJDBC.Trooper;
@@ -32,7 +33,10 @@ private Trooper user = new Trooper();
 		return null;
 	}
 
-
+	public Time newTime(String user_id, String monday, String tuesday, String wednesday, String thursday, String friday, String saturday, String sunday) {
+		System.out.println("User serice newTime log " + monday);
+		return null;
+	}
 
 	public Object timeByUser(String user_id) throws SQLException {
 		// TODO Auto-generated method stub
